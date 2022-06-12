@@ -3,14 +3,17 @@ import './App.css';
 
 function App() {
   return (
-    <><h1>Hello Dojo!</h1>
-    <p>Things I need to do:</p>
-    <ul>
-      <li>Learn React</li>
-      <li>Climb Mt. Everest</li>
-      <li>Run a marathon</li>
-      <li>Feed the dogs</li>
-    </ul></>
+    <div className="App">
+      <h1>Hello Dojo!</h1>
+      <h3>Things I need to do:</h3>
+      <ul>
+        <li>Learn React</li>
+        <li>Climb Mt. Everest</li>
+        <li>Run a marathon</li>
+        <li>Feed the dog</li>
+        <li>Get rid of .App slector in App.css</li>
+      </ul>
+    </div>
   );
 }
 
