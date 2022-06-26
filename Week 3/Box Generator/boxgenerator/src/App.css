@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+
+input{
+  height:20px;
+  font-size:15px
+}
+
+label{
+  font-size: 20px;
+  margin-right: 8px;
+}
