@@ -11,7 +11,7 @@ const Main = (props) => {
                 productList={productList}
                 setProductList={setProductList}
             />
-                        
+
             <DisplayAll
                 productList={productList}
                 setProductList={setProductList}

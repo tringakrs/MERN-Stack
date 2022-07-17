@@ -1,17 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const CreateProduct = (props) => {
-    const { productList, setProductList } = props;
+const UpdateProduct = (props) => {
+    const { id } = useParams();
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
 
+    const navigate = useNavigate();
+
+    const [headerTitle, setHeaderTitle] = useState("");
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8000/api/products/${id}`)
+            .then((res) => {
+                console.log(res.data);
+                setTitle(res.data.title);
+                setPrice(res.data.price);
+                setDescription(res.data.description);
+                setHeaderTitle(res.data.title);
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
     const submitHandler = (e) => {
         e.preventDefault();
 
-        axios
-            .post("http://localhost:8000/api/products", {
+        axios.put(`http://localhost:8000/api/products/${id}`, { 
                 title,
                 price,
                 description,
@@ -19,10 +36,7 @@ const CreateProduct = (props) => {
             .then((res) => {
                 console.log(res);
                 console.log(res.data);
-                setProductList([...productList, res.data]);
-                setTitle("");
-                setPrice("");
-                setDescription("");
+                navigate("/"); 
             })
             .catch((err) => {
                 console.log(err);
@@ -31,7 +45,7 @@ const CreateProduct = (props) => {
 
     return (
         <div>
-            <header>Product Manager</header>
+            <header>Edit {headerTitle}</header>
 
             <form onSubmit={submitHandler}>
                 <div className="form-fields">
@@ -69,10 +83,10 @@ const CreateProduct = (props) => {
                 </div>
 
                 <br />
-                <input class="submit-input" type="submit" value="Create" />
+                <input class="submit-input" type="submit" value="Update" />
             </form>
         </div>
     );
 };
 
-export default CreateProduct;
+export default UpdateProduct;
